@@ -1,10 +1,15 @@
 <template>
   <div id="app">
-    <header>
-
+    <header class="bg-green-600 p-2">
+      <nav class="flex-row space-x-2">
+        <a href="https://" target="_blank" rel="noopener noreferrer" class="font-black">Noter</a>
+        <a href="https://#" class="font-bold">Home</a>
+      </nav>
     </header>
-    <main>
+    <main class="px-12">
+      <section id="notes">
 
+      </section>
     </main>
   </div>
 </template>
@@ -20,7 +25,7 @@ export default defineComponent({
 <style lang="postcss">
 
 #app {
-  @apply px-10 pt-0 mt-0
+  @apply w-screen
 }
 
 </style>
