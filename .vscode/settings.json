@@ -8,5 +8,11 @@
         "typescript",
         "ts"
     ],
-    "editor.minimap.enabled": false
+    "auto-close-tag.activationOnLanguage": [
+        "xml",
+        "vue",
+        "HTML (EEx)",
+        "HTML (Eex)"
+    ],
+    "editor.minimap.enabled": false    
 }
