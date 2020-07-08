@@ -18,7 +18,7 @@ interface NotesState {
 /**
  * Cria uma anotação vazia.
  */
-const createBlankNote = (): Note => {
+function createBlankNote (): Note {
   return {
     id: '',
     titulo: '',
@@ -43,7 +43,7 @@ const notes = computed<Note[]>(() => state.available)
 /**
  * Anotação selecionada. Caso null retornará uma Vazia.
  */
-const selectedNote = reactive<Note>(state.current ?? createBlankNote())
+const selectedNote = computed<Note>(() => state.current ?? createBlankNote())
 
 const setAvaliable = (notes: Note[]): void => {
   state.available = notes
