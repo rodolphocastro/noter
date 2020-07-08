@@ -1,16 +1,20 @@
 <template>
-  <form class="px-12 container space-y-2" v-on:submit.prevent="submitChanges(current)" v-on:reset="cancelChanges">
+  <form
+    class="px-12 container space-y-2"
+    v-on:submit.prevent="submitChanges(current)"
+    v-on:reset="cancelChanges"
+  >
     <fieldset>
       <legend>Título</legend>
-      <input type="text" id="input-titulo" class="w-full" v-model.trim="current.titulo"/>
+      <input type="text" id="input-titulo" class="w-full" v-model.trim="current.titulo" />
     </fieldset>
     <fieldset>
       <legend>Descrição</legend>
       <textarea id="input-desc" class="w-full" v-model.trim="current.descricao"></textarea>
     </fieldset>
     <fieldset class="relative px-5">
-      <button type="reset" class="absolute bg-gray-500 px-4 py-2 left-0 w-32 h-12">Cancelar</button>
-      <button type="submit" class="absolute bg-green-400 px-4 py-2 right-0 w-32 h-12">Salvar</button>
+      <button type="reset" class="absolute button bg-gray-500 hover:bg-gray-300 left-0">Cancelar</button>
+      <button type="submit" class="absolute button bg-green-400 hover:bg-green-200 right-0">Salvar</button>
     </fieldset>
   </form>
 </template>
@@ -46,5 +50,11 @@ fieldset {
 
 legend {
   @apply font-normal;
+}
+
+.button {
+  @apply font-semibold;
+  @apply rounded-md px-4 py-2 w-32 h-12;
+  @apply transition duration-300;
 }
 </style>

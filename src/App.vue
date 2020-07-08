@@ -6,8 +6,8 @@
         <a href="https://#" class="font-bold">Home</a>
       </nav>
     </header>
-    <main class="px-12">
-      <section id="notes">
+    <main class="px-12 flex-grow">
+      <section id="notes" class="h-full">
         <notes-home></notes-home>
       </section>
     </main>
@@ -32,6 +32,6 @@ export default defineComponent({
 
 <style lang="postcss">
 #app {
-  @apply w-screen;
+  @apply w-screen h-screen inline-flex flex-col;
 }
 </style>

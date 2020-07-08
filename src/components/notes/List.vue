@@ -3,16 +3,15 @@
     <article
       v-for="note in notes"
       v-bind:key="note.id"
-      class="flex-grow shadow-lg border border-gray-300 m-3 w-3/12"
-    >
+      class="flex-grow shadow-lg border border-gray-300 m-3 max-w-sm overflow-hidden">
       <div class="px-6 py-4">
         <header class="mb-2">
           <h3 class="font-bold truncate">{{note.titulo}}</h3>
         </header>
-        <p class="text-base text-gray-700 truncate">{{note.descricao}}</p>
+        <p class="text-base text-gray-700 truncate leading-relaxed">{{note.descricao}}</p>
       </div>
-      <div class="px-6 py-4">
-        <button type="button" class="bg-gray-500 rounded-sm px-4 py-2 w-32">Selecionar</button>
+      <div class="px-6 py-4 block text-center">
+        <button type="button" class="bg-gray-500 hover:bg-gray-300 transition duration-500 rounded-lg px-4 py-2 w-32">Selecionar</button>
       </div>
     </article>
   </section>

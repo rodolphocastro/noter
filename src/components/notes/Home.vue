@@ -1,17 +1,19 @@
 <template>
-  <div class="w-full">
-    <header>
-      <nav class="flex-row space-x-2 text-lg">
+  <div class="w-full h-full">
+    <header class="w-full p-2 border-b border-green-700 mb-2">
+      <nav class="flex-row space-x-2 text-lg text-green-800 font-semibold">
         <a
           href="http://"
           target="_blank"
           rel="noopener noreferrer"
+          class="hover:text-green-600"
           v-on:click="navigateToBrowse"
         >Todas</a>
         <a
           href="http://"
           target="_blank"
           rel="noopener noreferrer"
+          class="hover:text-green-600"
           v-on:click="navigateToCreate"
         >Nova</a>
       </nav>
