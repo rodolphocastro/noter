@@ -1,7 +1,7 @@
 <template>
   <div class="w-full h-full">
     <header class="w-full p-2 border-b border-green-700 mb-2">
-      <nav class="flex-row space-x-2 text-lg text-green-800 font-semibold">
+      <nav class="inline-block space-x-2 text-lg text-green-800 font-semibold">
         <a
           href="http://"
           target="_blank"
@@ -22,36 +22,37 @@
       v-bind:is="selectedComponent"
       v-on:note-submited="navigateToBrowse"
       v-on:note-cancelled="navigateToBrowse"
+      v-on:note-selected="navigateToDetails"
+      v-on:note-edit-enabled="navigateToEdit"
     ></component>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from '@vue/composition-api'
-import { notesState, Note } from './Notes'
+import { notesState } from './Notes'
 
 export default defineComponent({
   name: 'notes-home',
   components: {
     'create-note': () => import('./Edit.vue'),
-    'list-notes': () => import('./List.vue')
+    'list-notes': () => import('./List.vue'),
+    'view-note': () => import('./View.vue')
   },
   setup () {
-    const components = ['list-notes', 'create-note']
+    const components = ['list-notes', 'create-note', 'view-note']
     const selectedComponent = ref(components[0])
     const navigateToBrowse = () => {
       notesState.toggleEdit(false)
       notesState.pickNote(null)
       selectedComponent.value = components[0]
     }
-    const navigateToDetails = (selected: Note) => {
+    const navigateToDetails = () => {
       notesState.toggleEdit(false)
-      notesState.pickNote(selected)
-      selectedComponent.value = components[0]
+      selectedComponent.value = components[2]
     }
-    const navigateToEdit = (selected: Note) => {
+    const navigateToEdit = () => {
       notesState.toggleEdit(true)
-      notesState.pickNote(selected)
       selectedComponent.value = components[1]
     }
     const navigateToCreate = () => {

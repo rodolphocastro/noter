@@ -3,7 +3,7 @@
     <article
       v-for="note in notes"
       v-bind:key="note.id"
-      class="flex-grow shadow-lg border border-gray-300 m-3 max-w-sm overflow-hidden">
+      class="flex-grow transition duration-300 shadow-md hover:shadow-2xl border border-gray-300 m-3 max-w-sm overflow-hidden">
       <div class="px-6 py-4">
         <header class="mb-2">
           <h3 class="font-bold truncate">{{note.titulo}}</h3>
@@ -11,7 +11,7 @@
         <p class="text-base text-gray-700 truncate leading-relaxed">{{note.descricao}}</p>
       </div>
       <div class="px-6 py-4 block text-center">
-        <button type="button" class="bg-gray-500 hover:bg-gray-300 transition duration-500 rounded-lg px-4 py-2 w-32">Selecionar</button>
+        <button @click.prevent="selectNote(note)" type="button" class="bg-gray-500 hover:bg-gray-300 transition duration-500 rounded-lg px-4 py-2 w-32">Selecionar</button>
       </div>
     </article>
   </section>
@@ -19,12 +19,18 @@
 
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api'
-import { notesState } from './Notes'
+import { notesState, Note } from './Notes'
 
 export default defineComponent({
-  setup () {
+  setup (_props, ctx) {
+    const { notes, pickNote } = notesState
+    const selectNote = (n: Note) => {
+      pickNote(n)
+      ctx.emit('note-selected')
+    }
     return {
-      notes: notesState.notes
+      notes,
+      selectNote
     }
   }
 })

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <header class="bg-green-600 p-2">
-      <nav class="flex-row space-x-2">
+      <nav class="inline-block space-x-2">
         <a href="https://" target="_blank" rel="noopener noreferrer" class="font-black">Noter</a>
         <a href="https://#" class="font-bold">Home</a>
       </nav>
