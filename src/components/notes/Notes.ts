@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueCompositionAPI, { reactive, computed } from '@vue/composition-api'
+import { openDB, IDBPDatabase } from 'idb'
 
 Vue.use(VueCompositionAPI)
 
@@ -13,6 +14,21 @@ interface NotesState {
   current: Note | null;
   available: Note[];
   isEditing: boolean;
+}
+
+async function useDb (): Promise<null | IDBPDatabase> {
+  if (!('indexedDB' in window)) {
+    alert('Seu navegador não possui suporte a Armazenamento')
+    return null
+  }
+  const db = await openDB('Noter', 1, {
+    upgrade (db) {
+      if (!db.objectStoreNames.contains('notes')) {
+        db.createObjectStore('notes', { keyPath: 'id', autoIncrement: true })
+      }
+    }
+  })
+  return db
 }
 
 /**
@@ -56,8 +72,10 @@ const setCurrent = (note: Note | null = null): void => {
  * Inicializa o state.
  */
 const loadAvailable = async (): Promise<void> => {
-  // TODO: Buscar da indexedDB
-  setAvaliable([{ id: '1', titulo: 'Minha anotação', descricao: 'Conteudo!' }])
+  const db = await useDb()
+  if (db) {
+    setAvaliable(await db.getAll('notes'))
+  }
 }
 
 /**
@@ -78,17 +96,18 @@ const toggleEdit = (newFlag: boolean): void => { state.isEditing = newFlag }
  * Salva as alterações de uma Anotação.
  * @param subject Objeto a ser salvo
  */
-const saveChanges = async (subject: Note): Promise<void> => {
+const saveChanges = (subject: Note): Promise<void> => {
   if (subject.id === '') {
-    insertNote(subject)
+    return insertNote(subject)
   } else {
-    updateNote(subject)
+    return updateNote(subject)
   }
 }
 
 const deleteNote = async (subject: Note): Promise<void> => {
-  if (subject.id !== '') {
-    setAvaliable([...notes.value.filter(n => n.id !== subject.id)])
+  const db = await useDb()
+  if (db && subject.id) {
+    await db.delete('notes', subject.id).then(() => loadAvailable())
   }
 }
 
@@ -96,19 +115,27 @@ const deleteNote = async (subject: Note): Promise<void> => {
  * Insere uma anotação no banco.
  * @param newNote Anotação a ser inserida
  */
-const insertNote = (newNote: Note) => {
-  // TODO: Salvar na indexedDB
-  newNote.id = (new Date()).getTime().toString()
-  setAvaliable([...notes.value, newNote])
+const insertNote = async (newNote: Note) => {
+  const db = await useDb()
+  if (db) {
+    await db.add('notes', newNote).then(() => loadAvailable())
+  } else {
+    newNote.id = (new Date()).getTime().toString()
+    setAvaliable([...notes.value, newNote])
+  }
 }
 
 /**
  * Atualiza uma anotação no banco.
  * @param updatedNote Anotação a ser atualizada
  */
-const updateNote = (updatedNote: Note) => {
-  // TODO: Atualizar na indexedDB
-  setAvaliable([...notes.value.filter(n => n.id !== updatedNote.id), updatedNote])
+const updateNote = async (updatedNote: Note) => {
+  const db = await useDb()
+  if (db) {
+    await db.put('notes', updatedNote).then(() => loadAvailable())
+  } else {
+    setAvaliable([...notes.value.filter(n => n.id !== updatedNote.id), updatedNote])
+  }
 }
 
 /**
