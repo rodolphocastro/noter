@@ -27,7 +27,7 @@
         class="bg-gray-500 hover:bg-gray-300 transition duration-500 rounded-lg px-4 py-2 w-32"
       >Editar</button>
       <button
-        @click="editNote"
+        @click="fireDeleteNote"
         type="button"
         class="bg-red-600 hover:bg-red-400 transition duration-500 rounded-lg px-4 py-2 w-32"
       >Deletar</button>
@@ -41,13 +41,19 @@ import { notesState } from './Notes'
 
 export default defineComponent({
   setup (_props, ctx) {
-    const { selectedNote } = notesState
+    const { selectedNote, pickNote, deleteNote } = notesState
     const editNote = () => {
+      pickNote(selectedNote.value)
       ctx.emit('note-edit-enabled')
+    }
+    const fireDeleteNote = () => {
+      deleteNote(selectedNote.value)
+      ctx.emit('note-deleted')
     }
     return {
       selectedNote,
-      editNote
+      editNote,
+      fireDeleteNote
     }
   }
 })

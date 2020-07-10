@@ -24,6 +24,7 @@
       v-on:note-cancelled="navigateToBrowse"
       v-on:note-selected="navigateToDetails"
       v-on:note-edit-enabled="navigateToEdit"
+      v-on:note-deleted="navigateToBrowse"
     ></component>
   </div>
 </template>

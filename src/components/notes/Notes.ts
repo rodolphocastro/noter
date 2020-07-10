@@ -87,6 +87,12 @@ const saveChanges = async (subject: Note): Promise<void> => {
   }
 }
 
+const deleteNote = async (subject: Note): Promise<void> => {
+  if (subject.id !== '') {
+    setAvaliable([...notes.value.filter(n => n.id !== subject.id)])
+  }
+}
+
 /**
  * Insere uma anotação no banco.
  * @param newNote Anotação a ser inserida
@@ -114,6 +120,7 @@ export const notesState = {
   pickNote,
   toggleEdit,
   saveChanges,
+  deleteNote,
   isEditing,
   notes,
   selectedNote
