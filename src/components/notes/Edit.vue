@@ -1,21 +1,21 @@
 <template>
   <form
-    class="px-12 container space-y-2"
+    class="max-w-xl bg-gray-100 shadow-lg px-2 py-4 border border-red-200"
     v-on:submit.prevent="submitChanges(current)"
     v-on:reset="cancelChanges"
   >
-    <fieldset>
-      <legend>Título</legend>
-      <input type="text" id="input-titulo" class="w-full" v-model.trim="current.titulo" />
-    </fieldset>
-    <fieldset>
-      <legend>Descrição</legend>
-      <textarea id="input-desc" class="w-full" v-model.trim="current.descricao"></textarea>
-    </fieldset>
-    <fieldset class="relative px-5">
-      <button type="reset" class="absolute button bg-gray-500 hover:bg-gray-300 left-0">Cancelar</button>
-      <button type="submit" class="absolute button bg-green-400 hover:bg-green-200 right-0">Salvar</button>
-    </fieldset>
+    <div class="mb-4 block">
+      <label class="block" for="input-titulo">Título</label>
+      <input class="w-full block shadow border rounded py-2 px-4 text-gray-700 leading-tight" type="text" id="input-titulo" v-model.trim="current.titulo" />
+    </div>
+    <div class="mb-4 block">
+      <label class="block" for="input-desc">Descrição</label>
+      <textarea class="w-full block shadow border rounded py-2 px-4 text-gray-700 leading-tight" id="input-desc" v-model.trim="current.descricao"></textarea>
+    </div>
+    <div class="relative block h-12">
+      <button type="reset" class="button bg-gray-500 hover:bg-gray-300 absolute inset-y-auto left-0">Cancelar</button>
+      <button type="submit" class="button bg-green-400 hover:bg-green-200 absolute inset-y-auto right-0">Salvar</button>
+    </div>
   </form>
 </template>
 
@@ -44,12 +44,13 @@ export default defineComponent({
 </script>
 
 <style scoped lang="postcss">
-fieldset {
-  @apply border-gray-300 border-solid border-2 relative;
+
+label {
+  @apply text-gray-700 text-sm font-bold mb-2;
 }
 
-legend {
-  @apply font-normal;
+input {
+  @apply appearance-none;
 }
 
 .button {

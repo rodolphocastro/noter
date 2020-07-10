@@ -19,9 +19,10 @@
       </nav>
     </header>
     <component
+      class="container mx-auto"
       v-bind:is="selectedComponent"
       v-on:note-submited="navigateToBrowse"
-      v-on:note-cancelled="navigateToBrowse"
+      v-on:note-cancelled="navigateToPrevious"
       v-on:note-selected="navigateToDetails"
       v-on:note-edit-enabled="navigateToEdit"
       v-on:note-deleted="navigateToBrowse"
@@ -61,13 +62,22 @@ export default defineComponent({
       notesState.pickNote(null)
       selectedComponent.value = components[1]
     }
+    const navigateToPrevious = () => {
+      notesState.toggleEdit(false)
+      if (notesState.selectedNote.value.id !== '') {
+        selectedComponent.value = components[2]
+      } else {
+        selectedComponent.value = components[0]
+      }
+    }
     return {
       components,
       selectedComponent,
       navigateToBrowse,
       navigateToDetails,
       navigateToEdit,
-      navigateToCreate
+      navigateToCreate,
+      navigateToPrevious
     }
   }
 })
