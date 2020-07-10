@@ -4,7 +4,7 @@ import VueCompositionAPI, { reactive, computed } from '@vue/composition-api'
 Vue.use(VueCompositionAPI)
 
 export interface Note {
-  id: string;
+  id?: string;
   titulo: string;
   descricao: string | null;
 }
@@ -20,7 +20,6 @@ interface NotesState {
  */
 function createBlankNote (): Note {
   return {
-    id: '',
     titulo: '',
     descricao: ''
   }
