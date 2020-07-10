@@ -6,22 +6,38 @@
   >
     <div class="mb-4 block">
       <label class="block" for="input-titulo">Título</label>
-      <input class="w-full block shadow border rounded py-2 px-4 text-gray-700 leading-tight" type="text" id="input-titulo" v-model.trim="current.titulo" />
+      <input
+        class="w-full block shadow border rounded py-2 px-4 text-gray-700 leading-tight"
+        type="text"
+        id="input-titulo"
+        v-model.trim="current.titulo"
+      />
     </div>
     <div class="mb-4 block">
       <label class="block" for="input-desc">Descrição</label>
-      <textarea class="w-full block shadow border rounded py-2 px-4 text-gray-700 leading-tight" id="input-desc" v-model.trim="current.descricao"></textarea>
+      <textarea
+        class="w-full block shadow border rounded py-2 px-4 text-gray-700 leading-tight"
+        id="input-desc"
+        v-model.trim="current.descricao"
+      ></textarea>
     </div>
     <div class="relative block h-12">
-      <button type="reset" class="button bg-gray-500 hover:bg-gray-300 absolute inset-y-auto left-0">Cancelar</button>
-      <button type="submit" class="button bg-green-400 hover:bg-green-200 absolute inset-y-auto right-0">Salvar</button>
+      <button
+        type="reset"
+        class="button bg-gray-500 hover:bg-gray-300 absolute inset-y-auto left-0"
+      >Cancelar</button>
+      <button
+        type="submit"
+        class="button bg-green-400 hover:bg-green-200 absolute inset-y-auto right-0"
+      >Salvar</button>
     </div>
   </form>
 </template>
 
 <script lang="ts">
 import { defineComponent, reactive } from '@vue/composition-api'
-import { notesState, Note } from './Notes'
+import { notesState } from './Notes'
+import { Note } from '@/models/Notes'
 
 export default defineComponent({
   setup (_props, ctx) {
@@ -44,7 +60,6 @@ export default defineComponent({
 </script>
 
 <style scoped lang="postcss">
-
 label {
   @apply text-gray-700 text-sm font-bold mb-2;
 }

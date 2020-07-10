@@ -1,14 +1,9 @@
 import Vue from 'vue'
 import VueCompositionAPI, { reactive, computed } from '@vue/composition-api'
 import { openDB, IDBPDatabase } from 'idb'
+import { Note, createBlankNote } from '@/models/Notes'
 
 Vue.use(VueCompositionAPI)
-
-export interface Note {
-  id?: string;
-  titulo: string;
-  descricao: string | null;
-}
 
 interface NotesState {
   current: Note | null;
@@ -29,16 +24,6 @@ async function useDb (): Promise<null | IDBPDatabase> {
     }
   })
   return db
-}
-
-/**
- * Cria uma anotação vazia.
- */
-function createBlankNote (): Note {
-  return {
-    titulo: '',
-    descricao: ''
-  }
 }
 
 const state = reactive<NotesState>({
