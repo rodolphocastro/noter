@@ -24,7 +24,8 @@ export default defineComponent({
     'notes-home': () => import('./components/notes/Home.vue')
   },
   setup () {
-    notesState.loadAvailable()
+    const { actions: { loadAvailable } } = notesState
+    loadAvailable()
     return {}
   }
 })

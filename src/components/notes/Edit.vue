@@ -41,9 +41,9 @@ import { Note } from '@/models/Notes'
 
 export default defineComponent({
   setup (_props, ctx) {
-    const current = reactive({ ...notesState.selectedNote.value })
+    const current = reactive({ ...notesState.computed.selectedNote.value })
     const submitChanges = async (note: Note) => {
-      await notesState.saveChanges({ ...note })
+      await notesState.actions.saveChanges({ ...note })
       ctx.emit('note-submited')
     }
     const cancelChanges = () => {
@@ -51,7 +51,7 @@ export default defineComponent({
     }
     return {
       current,
-      isEditing: notesState.isEditing,
+      isEditing: notesState.computed.isEditing,
       submitChanges,
       cancelChanges
     }

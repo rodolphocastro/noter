@@ -45,26 +45,26 @@ export default defineComponent({
     const components = ['list-notes', 'create-note', 'view-note']
     const selectedComponent = ref(components[0])
     const navigateToBrowse = () => {
-      notesState.toggleEdit(false)
-      notesState.pickNote(null)
+      notesState.actions.toggleEdit(false)
+      notesState.actions.pickNote(null)
       selectedComponent.value = components[0]
     }
     const navigateToDetails = () => {
-      notesState.toggleEdit(false)
+      notesState.actions.toggleEdit(false)
       selectedComponent.value = components[2]
     }
     const navigateToEdit = () => {
-      notesState.toggleEdit(true)
+      notesState.actions.toggleEdit(true)
       selectedComponent.value = components[1]
     }
     const navigateToCreate = () => {
-      notesState.toggleEdit(false)
-      notesState.pickNote(null)
+      notesState.actions.toggleEdit(false)
+      notesState.actions.pickNote(null)
       selectedComponent.value = components[1]
     }
     const navigateToPrevious = () => {
-      notesState.toggleEdit(false)
-      if (notesState.selectedNote.value.id !== '') {
+      notesState.actions.toggleEdit(false)
+      if (notesState.computed.selectedNote.value.id !== '') {
         selectedComponent.value = components[2]
       } else {
         selectedComponent.value = components[0]

@@ -28,7 +28,7 @@ import { Note } from '@/models/Notes'
 
 export default defineComponent({
   setup (_props, ctx) {
-    const { notes, pickNote } = notesState
+    const { computed: { notes }, actions: { pickNote } } = notesState
     const selectNote = (n: Note) => {
       pickNote(n)
       ctx.emit('note-selected')

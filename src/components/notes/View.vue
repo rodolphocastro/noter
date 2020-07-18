@@ -41,7 +41,7 @@ import { notesState } from './State'
 
 export default defineComponent({
   setup (_props, ctx) {
-    const { selectedNote, pickNote, deleteNote } = notesState
+    const { computed: { selectedNote }, actions: { deleteNote, pickNote } } = notesState
     const editNote = () => {
       pickNote(selectedNote.value)
       ctx.emit('note-edit-enabled')

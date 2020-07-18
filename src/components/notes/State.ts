@@ -112,12 +112,16 @@ const updateNote = async (updatedNote: Note) => {
  * State para Anotações.
  */
 export const notesState = {
+  actions: {
     loadAvailable,
     pickNote,
     toggleEdit,
     saveChanges,
-  deleteNote,
+    deleteNote
+  },
+  computed: {
     isEditing,
     notes,
     selectedNote
   }
+}
