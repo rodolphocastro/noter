@@ -16,7 +16,7 @@
 
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api'
-import { notesState } from './components/notes/Notes'
+import { notesState } from './components/notes/State'
 
 export default defineComponent({
   name: 'App',

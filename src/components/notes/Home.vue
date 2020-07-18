@@ -32,7 +32,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from '@vue/composition-api'
-import { notesState } from './Notes'
+import { notesState } from './State'
 
 export default defineComponent({
   name: 'notes-home',

@@ -3,7 +3,6 @@
     <article
       v-for="note in notes"
       v-bind:key="note.id"
-      class="flex-grow transition duration-300 shadow-md hover:shadow-2xl border border-gray-300 m-3 max-w-sm overflow-hidden"
     >
       <div class="px-6 py-4">
         <header class="mb-2">
@@ -24,7 +23,7 @@
 
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api'
-import { notesState } from './Notes'
+import { notesState } from './State'
 import { Note } from '@/models/Notes'
 
 export default defineComponent({
@@ -42,5 +41,14 @@ export default defineComponent({
 })
 </script>
 
-<style>
+<style scoped lang="postcss">
+
+article {
+  @apply flex-grow transition duration-300 shadow-md border border-gray-300 m-3 max-w-sm overflow-hidden;
+}
+
+article:hover {
+  @apply shadow-2xl;
+}
+
 </style>

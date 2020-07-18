@@ -11,9 +11,9 @@
       />
     </div>
     <div class="mb-4 block">
-      <label class="block text-gray-700 text-sm font-bold mb-2" for="note-titulo">Descricao</label>
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="note-titulo">Descrição</label>
       <textarea
-        class="w-full block shadow appearance-none border rounded py-2 px-4 text-gray-700 leading-tight"
+        class="w-full resize-y block shadow appearance-none border rounded py-2 px-4 text-gray-700 leading-tight"
         type="text"
         id="note-desc"
         disabled
@@ -37,7 +37,7 @@
 
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api'
-import { notesState } from './Notes'
+import { notesState } from './State'
 
 export default defineComponent({
   setup (_props, ctx) {

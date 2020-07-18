@@ -36,7 +36,7 @@
 
 <script lang="ts">
 import { defineComponent, reactive } from '@vue/composition-api'
-import { notesState } from './Notes'
+import { notesState } from './State'
 import { Note } from '@/models/Notes'
 
 export default defineComponent({
