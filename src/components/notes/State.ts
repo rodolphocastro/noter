@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueCompositionAPI, { reactive, computed } from '@vue/composition-api'
-import { openDB, IDBPDatabase } from 'idb'
 import { Note, createBlankNote } from '@/models/Notes'
+import { getDatabase } from '@/services/storage'
 
 Vue.use(VueCompositionAPI)
 
@@ -9,21 +9,6 @@ interface NotesState {
   current: Note | null;
   available: Note[];
   isEditing: boolean;
-}
-
-async function useDb (): Promise<null | IDBPDatabase> {
-  if (!('indexedDB' in window)) {
-    alert('Seu navegador não possui suporte a Armazenamento')
-    return null
-  }
-  const db = await openDB('Noter', 1, {
-    upgrade (db) {
-      if (!db.objectStoreNames.contains('notes')) {
-        db.createObjectStore('notes', { keyPath: 'id', autoIncrement: true })
-      }
-    }
-  })
-  return db
 }
 
 const state = reactive<NotesState>({
@@ -57,7 +42,7 @@ const setCurrent = (note: Note | null = null): void => {
  * Inicializa o state.
  */
 const loadAvailable = async (): Promise<void> => {
-  const db = await useDb()
+  const db = await getDatabase()
   if (db) {
     setAvaliable(await db.getAll('notes'))
   }
@@ -90,7 +75,7 @@ const saveChanges = (subject: Note): Promise<void> => {
 }
 
 const deleteNote = async (subject: Note): Promise<void> => {
-  const db = await useDb()
+  const db = await getDatabase()
   if (db && subject.id) {
     await db.delete('notes', subject.id).then(() => loadAvailable())
   }
@@ -101,7 +86,7 @@ const deleteNote = async (subject: Note): Promise<void> => {
  * @param newNote Anotação a ser inserida
  */
 const insertNote = async (newNote: Note) => {
-  const db = await useDb()
+  const db = await getDatabase()
   if (db) {
     await db.add('notes', newNote).then(() => loadAvailable())
   } else {
@@ -115,7 +100,7 @@ const insertNote = async (newNote: Note) => {
  * @param updatedNote Anotação a ser atualizada
  */
 const updateNote = async (updatedNote: Note) => {
-  const db = await useDb()
+  const db = await getDatabase()
   if (db) {
     await db.put('notes', updatedNote).then(() => loadAvailable())
   } else {
@@ -127,12 +112,12 @@ const updateNote = async (updatedNote: Note) => {
  * State para Anotações.
  */
 export const notesState = {
-  loadAvailable,
-  pickNote,
-  toggleEdit,
-  saveChanges,
+    loadAvailable,
+    pickNote,
+    toggleEdit,
+    saveChanges,
   deleteNote,
-  isEditing,
-  notes,
-  selectedNote
-}
+    isEditing,
+    notes,
+    selectedNote
+  }
